@@ -1,10 +1,16 @@
 import Head from 'next/head'
-import styles from '../styles/Home.module.css'
-import {App} from '../components/App'
+import { Navbar } from '../components/Navbar';
 
 const Home = () => {
   return (
-    <App/>
+    <div>
+    <Head>
+      <title>Create Next App</title>
+      <link rel='icon' href='/favicon.ico' />
+    </Head>
+    <Navbar />
+    <div>Hello World</div>
+  </div>
   )
 }
 
