@@ -14,7 +14,7 @@ setActive(!active);
       <a href='/'>
           <div className='inline-flex items-center p-2 mr-4  lg:ml-32'>
           <img src={logo} alt="rich" className="w-8"/>
-            <span className='text-2xl text-gray-700  font-da font-bold uppercase tracking-wide padding'>
+            <span className='text-2xl text-gray-700  font-mada font-bold uppercase tracking-wide padding'>
               MindGarden
            </span>
           </div>
@@ -56,7 +56,7 @@ setActive(!active);
               </div>
             </a>
             <a href='/'>
-              <div className='lg:inline-flex lg:w-auto w-full px-6 py-2 rounded text-gray-700 items-center justify-center hover:bg-green-600 hover:text-white  font-mada font-bold'>
+              <div className='lg:inline-flex lg:w-auto w-full px-6 py-2 rounded text-gray-700 items-center justify-center hover:bg-green-600 hover:text-white font-mada font-bold'>
                 Blogd
               </div>
             </a>
