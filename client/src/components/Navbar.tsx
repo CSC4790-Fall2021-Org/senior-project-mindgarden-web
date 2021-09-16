@@ -2,7 +2,8 @@ import { useState } from 'react';
 import logo from "../images/logo512.png"
 export const Navbar = () => {
   const [active, setActive] = useState(false);
-  const handleClick = () => { setActive(!active); };
+
+  const handleClick = () => { setActive(!active);};
 
   return (
     <>
@@ -16,7 +17,7 @@ export const Navbar = () => {
           </div>
         </a>
         <button
-          className=' inline-flex p-3 hover:bg-green-600 text-white ml-auto hover:text-white outline-none'
+          className=' inline-flex p-3 hover:bg-green-600 rounded lg:hidden text-white ml-auto hover:text-white outline-none'
           onClick={handleClick}
         >
           <svg
