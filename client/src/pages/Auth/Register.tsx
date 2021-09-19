@@ -1,5 +1,7 @@
 import React, {useState} from 'react'
 import { useForm } from 'react-hook-form'
+import { useHistory, Link } from "react-router-dom";
+import { auth }from "../../config/firebase"
 
 interface FormData {
   name: string
@@ -7,13 +9,25 @@ interface FormData {
   password: string
 }
 
-export const RegisterBox = () => {
-  const [name,setName] = useState("")
-  const {register, handleSubmit,  formState: { errors }  } = useForm<FormData>();
+const RegisterPage = () => {
+const [registering, setRegistering] = useState<boolean>(false);
+const {register, handleSubmit,  formState: { errors }  } = useForm<FormData>();
+const onSubmit = handleSubmit(({name, email,password}) => {
+  if (errors.email || errors.name || errors.password) { return }
+    // create and save new user in firebase 
+    setRegistering(true);
+    auth.createUserWithEmailAndPassword(email, password)
+    .then(result => {
+       history.push("/login")
+    })
+    .catch(error => {
+        alert(error)
+    })
+    setRegistering(false)
+})
 
-  const onSubmit = handleSubmit(({name, email,password}) => {
-    console.log(name)
-  })
+const history = useHistory();
+
   return (
     <>
  <div className="w-full max-w-md mx-auto">
@@ -21,7 +35,7 @@ export const RegisterBox = () => {
     Register
     </div>
    </div>
-  <div className="max-w-md w-full mx-auto h-4/6  mt-4 bg-darkWhite rounded p-8 rounded neoShadow">
+  <div className="max-w-md w-full mx-auto h-3/4  mt-4 bg-darkWhite rounded p-8 rounded neoShadow">
     <form action="" onSubmit={onSubmit} className="space-y-5 w-full">
       <div>
         <label htmlFor="" className="text-md font-bold font-mada text-gray-600 block ml-1">Name</label>
@@ -57,7 +71,7 @@ export const RegisterBox = () => {
         </div>
         </div>
         <div>
-            <div className = "neoShadow mt-12">
+            <div className = "neoShadow mt-20">
           <button className="w-full py-3 px-4 hover:bg-green-500 text-white text-md bg-green-700  text-center">
             Sign Up
           </button>
@@ -80,8 +94,12 @@ export const RegisterBox = () => {
          Sign in with Apple
       </button>
       </div>
+      <div>
+        <div className="m-1 text-center font-mada">Already have an account? <Link to="/login" className="text-green-700">Login Here.</Link></div>
+      </div>
     </form>
 </div>
 </>
   )
 }
+export default RegisterPage
