@@ -11,17 +11,21 @@ interface FormData {
 
 const RegisterPage = () => {
 const [registering, setRegistering] = useState<boolean>(false);
+const [password, setPassword] = useState<string>("")
+const [email, setEmail] = useState<string>("")
 const {register, handleSubmit,  formState: { errors }  } = useForm<FormData>();
+const [firebaseError, setFirebaseError ] = useState<string>("")
+
 const onSubmit = handleSubmit(({name, email,password}) => {
   if (errors.email || errors.name || errors.password) { return }
     // create and save new user in firebase 
     setRegistering(true);
-    auth.createUserWithEmailAndPassword(email, password)
+    auth.createUserWithEmailAndPassword(email, password) 
     .then(result => {
-       history.push("/login")
+       history.push("/")
     })
     .catch(error => {
-        alert(error)
+       setFirebaseError("Please try again using a different email")
     })
     setRegistering(false)
 })
@@ -54,7 +58,14 @@ const history = useHistory();
             value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
             message: "invalid email address"
           }
-          })}  type="text" className="w-full neoShadow p-3 mt-1 bg-darkWhite mx-auto outline-none" placeholder="sammy@gmail.com" name="email"/>
+          })}  type="text" className="w-full neoShadow p-3 mt-1 bg-darkWhite mx-auto outline-none" placeholder="sammy@gmail.com" 
+          name="email"
+          value={email}
+          onChange={event => {
+            setEmail(event.target.value)
+            setFirebaseError("")
+          }}/>
+          
         <div className="text-md font-mada text-red-600 ml-2">
         {errors.email && "Email is invalid" }
         </div>
@@ -65,10 +76,20 @@ const history = useHistory();
           required: true,
           minLength: 6, 
           maxLength: 24,
-        })}   type="password" className="w-full  neoShadow p-3 mt-1 bg-darkWhite mx-auto outline-none" placeholder="**********" name="password" />
+        })}   type="password" className="w-full  neoShadow p-3 mt-1 bg-darkWhite mx-auto outline-none" placeholder="**********"
+         name="password"
+         value={password}
+         onChange={event => {
+           setPassword(event.target.value)
+           setFirebaseError("")
+         }}
+          />
         <div className="text-md font-mada text-red-600 ml-2">
           {errors.password && "Password is invalid" }
         </div>
+        <div className="text-md font-mada text-red-600 ml-2 text-center">
+        {firebaseError }
+          </div>
         </div>
         <div>
             <div className = "neoShadow mt-20">

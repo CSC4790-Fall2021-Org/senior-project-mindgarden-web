@@ -3,7 +3,6 @@ import { Redirect } from 'react-router-dom';
 
 import { auth } from '../../config/firebase';
 import logging from '../../config/logging';
-import { Navbar  } from '../Navbar';
 
 export interface IAuthRouteProps { }
 
@@ -15,13 +14,13 @@ const AuthRoute: React.FunctionComponent<IAuthRouteProps> = props => {
         logging.warn('No user detected, redirecting');
         return (
           <div className="bg-darkWhite h-screen flex flex-col justify-center items-center w-screen">
-            <Redirect to="/home" />
+            <Redirect to="/login" />
           </div>
           );
     }
 
     return (
-        <div className="loco">
+        <div className="aloha">
           {children}
           </div>
     );

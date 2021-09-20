@@ -1,15 +1,19 @@
-import React from 'react';
+import React, { useState} from 'react';
 import { Route, RouteComponentProps, Switch } from 'react-router-dom';
 
 import  RegisterPage  from './pages/Auth/Register';
 import AuthRoute from './components/Authentication/AuthRoute';
 import routes from './config/routes';
 import { Navbar  } from './components/Navbar';
+import { AuthProvider } from './contexts/Auth/AuthProvider';
 
 export interface IAppProps { }
 
 const App: React.FunctionComponent<IAppProps> = props => {
+  // const [loading, setLoading] = useState<boolean>(true);
+
   return (
+    <AuthProvider>
       <div>
         <Navbar/>
           <Switch>
@@ -23,11 +27,13 @@ const App: React.FunctionComponent<IAppProps> = props => {
                               return (         
                               <AuthRoute><route.component  {...routeProps} /></AuthRoute>
                               );
+                              console.log(route, "route")
                           return <div className="bg-darkWhite h-screen flex flex-col justify-center items-center w-screen"><route.component  {...routeProps} /></div>
                       }}
                   />)}
           </Switch>
       </div>
+      </AuthProvider>
   );
 }
 
