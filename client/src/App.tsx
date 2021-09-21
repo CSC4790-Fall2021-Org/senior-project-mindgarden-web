@@ -1,19 +1,32 @@
-import React, { useState} from 'react';
+import React, { useState, useEffect } from 'react';
 import { Route, RouteComponentProps, Switch } from 'react-router-dom';
 
-import  RegisterPage  from './pages/Auth/Register';
 import AuthRoute from './components/Authentication/AuthRoute';
 import routes from './config/routes';
 import { Navbar  } from './components/Navbar';
-import { AuthProvider } from './contexts/Auth/AuthProvider';
+import logging from './config/logging';
+import { auth } from './config/firebase';
+import Loader from './components/shared/LoadingView';
 
 export interface IAppProps { }
 
 const App: React.FunctionComponent<IAppProps> = props => {
-  // const [loading, setLoading] = useState<boolean>(true);
+  const [loading, setLoading] = useState<boolean>(true);
 
+  useEffect(() => {
+   auth.onAuthStateChanged((firebaseUser) => {
+      if(firebaseUser) {
+          logging.info("user detected.");
+      } else {
+          logging.info("no user detected.")
+      }
+      setLoading(false)
+    });
+  }, []);
+
+  if (loading) 
+    return <div className="bg-darkWhite h-screen flex flex-col justify-center items-center w-screen"><Loader/></div>
   return (
-    <AuthProvider>
       <div>
         <Navbar/>
           <Switch>
@@ -33,7 +46,6 @@ const App: React.FunctionComponent<IAppProps> = props => {
                   />)}
           </Switch>
       </div>
-      </AuthProvider>
   );
 }
 

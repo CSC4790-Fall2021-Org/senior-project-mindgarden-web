@@ -1,8 +1,10 @@
 import React, {useState} from 'react'
 import { useForm } from 'react-hook-form'
 import { useHistory, Link } from "react-router-dom";
-import { auth }from "../../config/firebase"
+import { auth, Providers }from "../../config/firebase"
 import logging from '../../config/logging';
+import firebase from 'firebase';
+import { SignInWithSocialMedia } from './modules';
 
 interface FormData {
   name: string
@@ -33,7 +35,24 @@ const onSubmit = handleSubmit(({name, email,password}) => {
 })
 
 const history = useHistory();
+const appleProvider = new firebase.auth.OAuthProvider('apple.com');
+appleProvider.addScope('email');
+appleProvider.addScope('name');
+const googleProvider = new firebase.auth.OAuthProvider('google.com');
+const signInWithSocialMedia = (provider: firebase.auth.OAuthProvider) => {
+  setAuthenticating(true)
 
+  SignInWithSocialMedia(provider)
+  .then(result => {
+    logging.info(result)
+    history.push("/")
+  })
+  .catch(error => {
+    logging.error(error);
+    setFirebaseError("There was a problem signing in");
+    setAuthenticating(false)
+  })
+}
   return (
     <>
  <div className="w-full max-w-md mx-auto">
@@ -42,7 +61,8 @@ const history = useHistory();
     </div>
    </div>
   <div className="max-w-md w-full mx-auto h-3/5  mt-4 bg-darkWhite rounded p-8 rounded neoShadow">
-    <form action="" onSubmit={onSubmit} className="space-y-5 w-full">
+    <div className="space-y-5 w-full">
+    <form action="" onSubmit={onSubmit} >
         <div>
         <label htmlFor="" className="text-md font-bold font-mada text-gray-600 block ml-1">Email</label>
         <input  {...register("email", {
@@ -65,7 +85,7 @@ const history = useHistory();
         </div>
         </div>
         <div>
-        <label htmlFor="" className="text-md font-bold font-mada text-gray-600 block ml-1">Password</label>
+        <label htmlFor="" className="text-md font-bold font-mada text-gray-600 block ml-1 mt-2">Password</label>
         <input  {...register("password", {
           required: true,
           minLength: 6, 
@@ -92,29 +112,35 @@ const history = useHistory();
           </button>
       </div>
       </div>
-      <div>
+    </form>
+    <div>
             <div className='g-sign-in-button neoShadow'>
               <div className="content-wrapper">
               <div className='logo-wrapper'>  
                   <img src='https://developers.google.com/identity/images/g-logo.png'/>
              </div>  
                      <span className='text-container text-center'> 
-                    <span className="text-center">Sign in with Google</span>
+                    <button 
+                    className="text-center"
+                    onClick={() => signInWithSocialMedia(googleProvider)}
+                    >Sign in with Google</button>
                   </span>
               </div>  
             </div>
       </div>
       <div className="neoShadow">
-      <button className="apple-sign-in">
+      <button 
+      className="apple-sign-in"                     
+      onClick={() => signInWithSocialMedia(appleProvider)}
+    >
          Sign in with Apple
       </button>
       </div>
       <div>
-        <div className="m-1 text-center text-green-700 font-mada">Dont have an account? <Link to="/register" className="text-green-700">Register Here.</Link></div>
+        <div className="m-1 text-center  font-mada">Dont have an account? <Link to="/register" className="text-green-700">Register Here.</Link></div>
+        <div className="m-1 text-center  font-mada">Forgot Password? <Link to="/forgot" className="text-green-700">Reset Here.</Link></div>
       </div>
-      <div>
-      </div>
-    </form>
+</div>
 </div>
 </>
   )
