@@ -1,9 +1,14 @@
 import { useState } from 'react';
 import logo from "../images/logo512.png"
-export const Navbar = () => {
+export interface INavbarProps  { 
+  isLoggedIn: Boolean
+}
+export const Navbar: React.FunctionComponent<INavbarProps> = props => {
   const [active, setActive] = useState(false);
 
-  const handleClick = () => { setActive(!active);};
+  const handleClick = () => { 
+    console.log(props.isLoggedIn)
+    setActive(!active);};
 
   return (
     <>
@@ -59,7 +64,7 @@ export const Navbar = () => {
             </a>
             <a href='/'>
               <div className='lg:inline-flex lg:w-auto w-full px-6 py-2 rounded text-gray-700 font-mada font-bold items-center justify-center hover:bg-green-600 hover:text-white'>
-                Login/Register
+                {props.isLoggedIn ? "Profile" : "Login/Register" }
               </div>
             </a>
           </div>

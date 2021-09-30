@@ -12,13 +12,16 @@ export interface IAppProps { }
 
 const App: React.FunctionComponent<IAppProps> = props => {
   const [loading, setLoading] = useState<boolean>(true);
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(true)
 
   useEffect(() => {
    auth.onAuthStateChanged((firebaseUser) => {
       if(firebaseUser) {
           logging.info("user detected.");
+          setIsLoggedIn(true)
       } else {
           logging.info("no user detected.")
+          setIsLoggedIn(false)
       }
       setLoading(false)
     });
@@ -28,7 +31,7 @@ const App: React.FunctionComponent<IAppProps> = props => {
     return <div className="bg-darkWhite h-screen flex flex-col justify-center items-center w-screen"><Loader/></div>
   return (
       <div>
-        <Navbar/>
+        <Navbar isLoggedIn={isLoggedIn}/>
           <Switch>
               {routes.map((route, index) => 
                   <Route
