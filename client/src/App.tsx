@@ -23,7 +23,7 @@ const App: React.FunctionComponent<IAppProps> = props => {
       setLoading(false)
     });
   }, []);
-
+  
   if (loading) 
     return <div className="bg-darkWhite h-screen flex flex-col justify-center items-center w-screen"><Loader/></div>
   return (
