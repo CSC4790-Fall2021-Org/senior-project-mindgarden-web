@@ -4,6 +4,7 @@ import RegisterPage from "../pages/Auth/Register"
 import LoginPage  from "../pages/Auth/Login";
 import ChangePasswordPage from "../pages/Auth/ChangePassword";
 import ForgotPasswordPage from "../pages/Auth/Forgot";
+import { ProfilePage } from "../pages/Profile/ProfilePage";
 
 const routes: IRoute[] = [
   {
@@ -40,6 +41,13 @@ const routes: IRoute[] = [
   component: ForgotPasswordPage,
   name: 'Change Password Page',
   protected: false 
+},
+{
+  path: '/profile',
+  exact: true,
+  component: ProfilePage,
+  name: 'Profile Page',
+  protected: true
 },
 ];
 
