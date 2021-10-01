@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { OptionButton } from "../../components/Profile/OptionButton";
 import { ProfileComponent } from "../../components/Profile/ProfileComponent";
 import { StatsComponent } from "../../components/Profile/StatsComponent";
+import ChangePasswordPage from "../Auth/ChangePassword";
 
 export interface IProfileProps {}
 
@@ -22,7 +22,7 @@ export const ProfilePage: React.FunctionComponent<IProfileProps> = (props) => {
           case Page.Stats:
             return <StatsComponent goBackTo={setPageType} />;
           case Page.ChangePassword:
-            return <div>stats</div>;
+            return <ChangePasswordPage goBackTo={setPageType} />;
           case Page.Settings:
             return <div>settings</div>;
           case Page.Profile:

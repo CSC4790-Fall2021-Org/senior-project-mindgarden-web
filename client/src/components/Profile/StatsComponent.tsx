@@ -6,13 +6,11 @@ import { auth } from "../../config/firebase";
 import { getProfileData } from "../../services/FirebaseApi";
 import { Page } from "../../pages/Profile/ProfilePage";
 
-export interface IStatsComponent {
+export interface IGoBack {
   goBackTo: React.Dispatch<React.SetStateAction<Page>>;
 }
 
-export const StatsComponent: React.FunctionComponent<IStatsComponent> = (
-  props
-) => {
+export const StatsComponent: React.FunctionComponent<IGoBack> = (props) => {
   const [joinDate, setJoinDate] = useState<String>("");
   const [totalMins, setTotalMins] = useState<Number>(1);
   const [totalSessions, setTotalSessions] = useState<Number>(1);
