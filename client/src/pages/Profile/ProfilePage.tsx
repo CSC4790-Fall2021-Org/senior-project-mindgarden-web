@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { OptionButton } from "../../components/Profile/OptionButton";
 import { ProfileComponent } from "../../components/Profile/ProfileComponent";
+import { StatsComponent } from "../../components/Profile/StatsComponent";
 
 export interface IProfileProps {}
 
@@ -19,7 +20,7 @@ export const ProfilePage: React.FunctionComponent<IProfileProps> = (props) => {
       {(() => {
         switch (pageType) {
           case Page.Stats:
-            return <div>stats</div>;
+            return <StatsComponent goBackTo={setPageType} />;
           case Page.ChangePassword:
             return <div>stats</div>;
           case Page.Settings:
