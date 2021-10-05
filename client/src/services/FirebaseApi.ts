@@ -6,8 +6,8 @@ const db = firebase.firestore();
 
 export const getProfileData = async () => {
   let retArray: Array<String> = [];
-  let collection = db.collection(USER_PREFERENCES);
-  const data = await collection
+  await db
+    .collection(USER_PREFERENCES)
     .doc(auth.currentUser?.email || "")
     .get()
     .then((doc) => {

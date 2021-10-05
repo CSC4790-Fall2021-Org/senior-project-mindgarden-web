@@ -3,6 +3,7 @@ import firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/firestore";
 
+// TODO create process.env 
 const firebaseConfig = {
   apiKey: "AIzaSyDhk31WWimocu6AQaxnsIMq63eJ7F7xP5A",
   authDomain: "mindgarden-b9527.firebaseapp.com",

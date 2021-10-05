@@ -7,6 +7,7 @@ import { Navbar } from "./components/Navbar";
 import logging from "./config/logging";
 import { auth } from "./config/firebase";
 import Loader from "./components/shared/LoadingView";
+import { NotFound } from "./pages/NotFound";
 
 export interface IAppProps {}
 
@@ -58,6 +59,7 @@ const App: React.FunctionComponent<IAppProps> = (props) => {
             }}
           />
         ))}
+        <Route component={NotFound} />
       </Switch>
     </div>
   );

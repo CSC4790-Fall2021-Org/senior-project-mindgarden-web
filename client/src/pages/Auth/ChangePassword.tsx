@@ -71,7 +71,7 @@ const ChangePasswordPage: React.FunctionComponent<IGoBack> = (props) => {
           </svg>
         </button>
       </div>
-      <div className="max-w-md w-full mx-auto h-3/6  mt-4 bg-darkWhite rounded p-8 rounded neoShadow">
+      <div className="max-w-md w-full mx-auto h-2/5  mt-4 bg-darkWhite rounded p-8 rounded neoShadow">
         <form action="" onSubmit={onSubmit} className="space-y-5 w-full">
           <div>
             <label
