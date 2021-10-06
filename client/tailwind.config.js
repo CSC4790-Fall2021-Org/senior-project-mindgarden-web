@@ -1,3 +1,5 @@
+const defaultTheme = require("tailwindcss/defaultTheme");
+
 module.exports = {
   purge: [],
   darkMode: false, // or 'media' or 'class'
@@ -9,6 +11,9 @@ module.exports = {
           DEFAULT: "#F4F4F4",
           dark: "#F4F4F4",
         },
+      },
+      screens: {
+        xs: { max: "639px" },
       },
       fontFamily: {
         mada: ["Mada", "sans-serif"],

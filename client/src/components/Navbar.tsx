@@ -58,9 +58,9 @@ export const Navbar: React.FunctionComponent<INavbarProps> = (props) => {
                 {props.isLoggedIn ? "🪴 Garden" : "About"}
               </div>
             </a>
-            <a href="/">
+            <a href={props.isLoggedIn ? "/store" : "/"}>
               <div className="lg:inline-flex lg:w-auto w-full px-6 py-2 rounded text-gray-700 items-center justify-center hover:bg-green-600 hover:text-white font-mada font-bold">
-                🖊 Blog
+                {props.isLoggedIn ? "🌻Store " : "🖊 Blog"}
               </div>
             </a>
             <a href={props.isLoggedIn ? "/profile" : "/"}>
