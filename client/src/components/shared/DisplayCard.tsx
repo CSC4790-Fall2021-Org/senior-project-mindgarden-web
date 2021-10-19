@@ -1,10 +1,11 @@
 import React from "react";
 import redTulipPacket from "../../images/redTulipPacket.svg";
-import coin from "../../images/coin.svg";
 import { motion } from "framer-motion";
+import { PlantType } from "../../Models/Plant";
 
 interface IDisplayCard {
   handleOpen: () => void;
+  plant: PlantType;
 }
 
 export const DisplayCard: React.FunctionComponent<IDisplayCard> = (props) => {
@@ -15,14 +16,20 @@ export const DisplayCard: React.FunctionComponent<IDisplayCard> = (props) => {
       whileTap={{ scale: 0.9 }}
     >
       <div className="justify-center h-80 neoShadow items-center flex-col">
-        <img src={redTulipPacket} alt="Red Tulips Packet" className="w-7/12" />
-        <div className="font-mada font-bold text-gray-700 text-2xl w-5/6">
-          Red Tulips
+        <img
+          src={props.plant.packetImage}
+          alt="Red Tulips Packet"
+          className="w-7/12"
+        />
+        <div className="flex justify-start w-full">
+          <div className="font-mada font-bold text-gray-700 text-2xl ml-6">
+            {props.plant.title}
+          </div>
         </div>
-        <div className="flex w-full justify-center -ml-2">
-          <img src={coin} alt="coin" className="w-6 mr-2" />
-          <div className="font-mada font-semibold text-gray-700 text-2xl w-4/6">
-            200
+        <div className="flex w-full justify-start ml-12">
+          <img src={"/images/coin.svg"} alt="coin" className="w-6" />
+          <div className="font-mada font-semibold text-gray-700 text-2xl w-1/4 justify-start">
+            {props.plant.price}
           </div>
         </div>
       </div>
