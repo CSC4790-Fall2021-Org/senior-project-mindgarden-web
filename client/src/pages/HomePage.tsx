@@ -5,7 +5,7 @@ import { LogoutButton } from "../components/Authentication/LogoutButton";
 const HomePage = () => {
   return (
     <div className="container h-screen w-screen">
-      <div className="bg-darkWhite drawer drawer-mobile h-screen">
+      <div className="bg-darkWhite drawer drawer-mobile h-screen w-screen">
         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
         <div className="flex flex-col items-center justify-center drawer-content">
           <label
@@ -25,14 +25,60 @@ const HomePage = () => {
             Resize the browser to see fixed sidebar on desktop size
           </div>
         </div>
-        <div className="drawer-side">
+        <div className="drawer-side shadow-2xl bg-darkWhite w-full rounded-3xl drop-shadow">
           <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
-          <ul className="menu p-4 overflow-y-auto w-80 bg-base-100 text-base-content">
+          <ul className="menu p-4 overflow-y-auto w-80 text-base-content">
             <li>
-              <a>Menu Item</a>
+              <button className="active:bg-green-700 h-10 justify-center items-center neoShadow font-mada mt-2">
+                <div
+                  className="w-30
+                 justify-start flex"
+                >
+                  🧘‍♂️ &nbsp;&nbsp;All Meditations
+                </div>
+              </button>
             </li>
             <li>
-              <a>Menu Item</a>
+              <button className="active:bg-green-700 h-10 items-center mt-4 neoShadow font-mada justify-center">
+                <div className="w-32 justify-start flex">
+                  👨‍🏫&nbsp;&nbsp;&nbsp;&nbsp;Courses
+                </div>
+              </button>
+            </li>
+            <li>
+              <button className="active:bg-green-700 h-10 items-center mt-4 neoShadow font-mada justify-center">
+                <div className="w-32 justify-start flex">
+                  🕒&nbsp;&nbsp;&nbsp;&nbsp;Unguided
+                </div>
+              </button>
+            </li>
+            <li>
+              <button className="active:bg-green-700 h-10 justify-center items-center mt-4 neoShadow font-mada">
+                <div className="w-32 justify-start flex">
+                  🌜&nbsp;&nbsp;&nbsp;&nbsp;Sleep
+                </div>
+              </button>
+            </li>
+            <li>
+              <button className="active:bg-green-700 h-10 justify-center items-center mt-4 neoShadow font-mada">
+                <div className="w-32 justify-start flex">
+                  🔎 &nbsp;&nbsp;Focus
+                </div>
+              </button>
+            </li>
+            <li>
+              <button className="active:bg-green-700 h-10 justify-center items-center mt-4 neoShadow font-mada">
+                <div className="w-32 justify-start flex">
+                  😥 &nbsp;&nbsp;Anxiety
+                </div>
+              </button>
+            </li>
+            <li>
+              <button className="active:bg-green-700 h-10 justify-center items-center mt-4 neoShadow font-mada">
+                <div className="w-32 justify-start flex">
+                  🪴&nbsp;&nbsp;Growth
+                </div>
+              </button>
             </li>
           </ul>
         </div>

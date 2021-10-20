@@ -50,22 +50,22 @@ export const Navbar: React.FunctionComponent<INavbarProps> = (props) => {
           <div className="lg:inline-flex lg:flex-row lg:ml-auto lg:w-auto w-full lg:items-center items-start flex flex-col lg:h-auto mr-32">
             <a href="/">
               <div className="lg:inline-flex lg:w-auto w-full px-6 py-2 rounded text-gray-700 font-mada font-bold items-center justify-center hover:bg-green-600 hover:text-white ">
-                🏠 Home
+                🏠 &nbsp;&nbsp;Home
               </div>
             </a>
             <a href="/">
               <div className="lg:inline-flex lg:w-auto w-full px-6 py-2 rounded text-gray-700 font-bold font-sans items-center justify-center hover:bg-green-600 hover:text-white">
-                {props.isLoggedIn ? "🪴 Garden" : "About"}
+                {props.isLoggedIn ? "🪴   Garden" : "About"}
               </div>
             </a>
             <a href="/">
               <div className="lg:inline-flex lg:w-auto w-full px-6 py-2 rounded text-gray-700 items-center justify-center hover:bg-green-600 hover:text-white font-mada font-bold">
-                🖊 Blog
+                🖊 &nbsp;&nbsp;Blog
               </div>
             </a>
             <a href={props.isLoggedIn ? "/profile" : "/"}>
               <div className="lg:inline-flex lg:w-auto w-full px-6 py-2 rounded text-gray-700 font-mada font-bold items-center justify-center hover:bg-green-600 hover:text-white">
-                {props.isLoggedIn ? "🙆‍♂️ Profile" : "Login/Register"}
+                {props.isLoggedIn ? "🙍‍♂️Profile" : "Login/Register"}
               </div>
             </a>
           </div>
