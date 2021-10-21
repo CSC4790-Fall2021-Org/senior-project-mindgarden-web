@@ -10,7 +10,7 @@ export const NotFound: React.FunctionComponent = () => {
         </h1>
       </div>
       <div className="flex justify-center mt-5">
-        <img src={coloredPots} alt="Colored Plants" />
+        <img src={"/images/coloredPots.svg"} alt="Colored Plants" />
       </div>
     </div>
   );

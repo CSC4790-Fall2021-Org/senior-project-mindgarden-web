@@ -1,5 +1,4 @@
 import { useState } from "react";
-import logo from "../images/mgLogo.svg";
 export interface INavbarProps {
   isLoggedIn: Boolean;
 }
@@ -16,7 +15,11 @@ export const Navbar: React.FunctionComponent<INavbarProps> = (props) => {
       <nav className="flex items-center flex-wrap bg-darkWhite p-3 ">
         <a href="/">
           <div className="inline-flex items-center p-2 mr-4  lg:ml-32">
-            <img src={logo} alt="rich" className="w-8 mr-2 mb-2" />
+            <img
+              src={"/images/mgLogo.svg"}
+              alt="rich"
+              className="w-8 mr-2 mb-2"
+            />
             <span className="text-2xl text-gray-700  font-mada font-bold uppercase tracking-wide padding">
               MindGarden
             </span>
@@ -58,9 +61,9 @@ export const Navbar: React.FunctionComponent<INavbarProps> = (props) => {
                 {props.isLoggedIn ? "🪴   Garden" : "About"}
               </div>
             </a>
-            <a href="/">
+            <a href={props.isLoggedIn ? "/store" : "/"}>
               <div className="lg:inline-flex lg:w-auto w-full px-6 py-2 rounded text-gray-700 items-center justify-center hover:bg-green-600 hover:text-white font-mada font-bold">
-                🖊 &nbsp;&nbsp;Blog
+                {props.isLoggedIn ? "🌻Store " : "🖊 Blog"}
               </div>
             </a>
             <a href={props.isLoggedIn ? "/profile" : "/"}>
