@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import { DisplayCard } from "../components/shared/DisplayCard";
 import coin from "../images/coin.svg";
@@ -74,7 +74,7 @@ const OkayModal: React.FunctionComponent<IOkayModal> = (props) => {
 
 export const StorePage: React.FunctionComponent<IStorePage> = () => {
   const [isOpen, toggle] = useState(false);
-  const [isOkayOpen, toggleOkay] = useState(false);
+  const [isOkayOpen, toggleOkay] = useState<boolean>(false);
   const [selectedPlant, togglePlant] = useState<PlantType>(plants[0]);
 
   function handleOpenModal(open: boolean, plant: PlantType) {
@@ -100,13 +100,6 @@ export const StorePage: React.FunctionComponent<IStorePage> = () => {
             handleOpen={() => handleOpenModal(true, plant)}
           />
         ))}
-        <div className="justify-center h-80 w-1/6 flex bg-red-300 neoShadow">
-          1
-        </div>
-        <div className="justify-center h-80 neoShadow">2</div>
-        <div className="justify-center h-80 flex bg-red-300 neoShadow">4</div>
-        <div className="justify-center h-80 flex bg-red-300 neoShadow">5</div>
-        <div className="flex justify-center">6</div>
       </div>
       <Modal
         isOpen={isOpen}

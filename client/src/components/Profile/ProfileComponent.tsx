@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { Page } from "../../pages/Profile/ProfilePage";
 import { OptionButton } from "./OptionButton";
-
+import { auth } from "../../config/firebase";
+import logging from "../../config/logging";
+import { useHistory } from "react-router";
 export interface IProfileComponent {
   setPageType: React.Dispatch<React.SetStateAction<Page>>;
 }
@@ -9,6 +11,8 @@ export interface IProfileComponent {
 export const ProfileComponent: React.FunctionComponent<IProfileComponent> = (
   props
 ) => {
+  const history = useHistory();
+
   return (
     <>
       <div className="w-full max-w-md mx-auto mt-8">
@@ -57,7 +61,12 @@ export const ProfileComponent: React.FunctionComponent<IProfileComponent> = (
       </button>
       <button
         className="max-w-md w-full mx-auto flex"
-        onClick={() => alert("frog")}
+        onClick={() =>
+          auth
+            .signOut()
+            .then(() => history.push("/login"))
+            .catch((error) => logging.error(error))
+        }
       >
         <OptionButton
           title={"Logout"}
