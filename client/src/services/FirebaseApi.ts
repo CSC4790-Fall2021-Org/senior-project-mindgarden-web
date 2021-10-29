@@ -1,10 +1,10 @@
 import firebase from "firebase";
-import { USER_PREFERENCES } from "../config/constants";
 import { auth } from "../config/firebase";
+import { USER_PREFERENCES } from "../config/constants";
 
 const db = firebase.firestore();
 
-export const getProfileData = async () => {
+export const fetchAllData = async () => {
   let retArray: Array<String> = [];
   await db
     .collection(USER_PREFERENCES)

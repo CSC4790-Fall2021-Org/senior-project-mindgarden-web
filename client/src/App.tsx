@@ -8,7 +8,6 @@ import logging from "./config/logging";
 import { auth } from "./config/firebase";
 import Loader from "./components/shared/LoadingView";
 import { NotFound } from "./pages/NotFound";
-import { FirebaseProvider } from "./contexts/FirebaseContext";
 
 export interface IAppProps {}
 
@@ -17,6 +16,7 @@ const App: React.FunctionComponent<IAppProps> = (props) => {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(true);
 
   useEffect(() => {
+    console.log("calling here");
     auth.onAuthStateChanged((firebaseUser) => {
       if (firebaseUser) {
         logging.info("user detected.");
@@ -36,35 +36,33 @@ const App: React.FunctionComponent<IAppProps> = (props) => {
       </div>
     );
   return (
-    <FirebaseProvider>
-      <div className="bg-darkWhite">
-        <Navbar isLoggedIn={isLoggedIn} />
-        <Switch>
-          {routes.map((route, index) => (
-            <Route
-              key={index}
-              path={route.path}
-              exact={route.exact}
-              render={(routeProps: RouteComponentProps<any>) => {
-                if (route.protected)
-                  return (
-                    <AuthRoute>
-                      <route.component {...routeProps} />
-                    </AuthRoute>
-                  );
-                console.log(route, "route");
+    <div className="bg-darkWhite">
+      <Navbar isLoggedIn={isLoggedIn} />
+      <Switch>
+        {routes.map((route, index) => (
+          <Route
+            key={index}
+            path={route.path}
+            exact={route.exact}
+            render={(routeProps: RouteComponentProps<any>) => {
+              if (route.protected)
                 return (
-                  <div className="bg-darkWhite h-screen flex flex-col justify-center items-center w-screen">
+                  <AuthRoute>
                     <route.component {...routeProps} />
-                  </div>
+                  </AuthRoute>
                 );
-              }}
-            />
-          ))}
-          <Route component={NotFound} />
-        </Switch>
-      </div>
-    </FirebaseProvider>
+              console.log(route, "route");
+              return (
+                <div className="bg-darkWhite h-screen flex flex-col justify-center items-center w-screen">
+                  <route.component {...routeProps} />
+                </div>
+              );
+            }}
+          />
+        ))}
+        <Route component={NotFound} />
+      </Switch>
+    </div>
   );
 };
 

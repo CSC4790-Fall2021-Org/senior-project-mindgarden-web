@@ -1,12 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import { LogoutButton } from "../components/Authentication/LogoutButton";
 import { motion } from "framer-motion";
+import { FirebaseContext } from "../contexts/FirebaseContext";
 
 const HomePage = () => {
   const [isChecked, setIsChecked] = useState(false);
-
-  useEffect(() => {}, []);
+  const { user, fetchAllData } = useContext(FirebaseContext);
+  useEffect(() => {
+    fetchAllData();
+  }, []);
 
   return (
     <div className="container h-screen w-screen">

@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { StatsBox } from "./StatsBox";
 import firebase from "firebase";
 import { USER_PREFERENCES } from "../../config/constants";
 import { auth } from "../../config/firebase";
-import { getProfileData } from "../../services/FirebaseApi";
 import { Page } from "../../pages/Profile/ProfilePage";
+import { FirebaseContext } from "../../contexts/FirebaseContext";
+import { UserType } from "../../interfaces/User";
 
 export interface IGoBack {
   goBackTo: React.Dispatch<React.SetStateAction<Page>>;
@@ -12,8 +13,16 @@ export interface IGoBack {
 
 export const StatsComponent: React.FunctionComponent<IGoBack> = (props) => {
   const [joinDate, setJoinDate] = useState<String>("");
-  const [totalMins, setTotalMins] = useState<Number>(1);
-  const [totalSessions, setTotalSessions] = useState<Number>(1);
+  const [totalMins, setTotalMins] = useState<String>("");
+  const [totalSessions, setTotalSessions] = useState<String>("");
+  const { user, fetchAllData } = useContext(FirebaseContext);
+
+  useEffect(() => {
+    let userType = user as UserType;
+    setJoinDate(userType.dateJoined);
+    setTotalMins(userType.totalMins);
+    setTotalSessions(userType.totalSessions);
+  }, []);
 
   async function getData() {
     const db = firebase.firestore();
@@ -75,12 +84,12 @@ export const StatsComponent: React.FunctionComponent<IGoBack> = (props) => {
       <StatsBox
         title={"Total Time Meditated: "}
         img={"M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"}
-        data={String(totalMins)}
+        data={totalMins}
       />
       <StatsBox
         title={"Total Meditation Sessions: "}
         img={"M13 10V3L4 14h7v7l9-11h-7z"}
-        data={String(totalSessions)}
+        data={totalSessions}
       />
     </div>
   );
