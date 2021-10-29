@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 
 import { DisplayCard } from "../components/shared/DisplayCard";
 import coin from "../images/coin.svg";
@@ -6,6 +6,9 @@ import redTulipPacket from "../images/redTulipPacket.svg";
 import { Modal } from "../components/shared/Modal";
 import { motion } from "framer-motion";
 import { plants, PlantType } from "../Models/Plant";
+import { buyPlant } from "../services/FirebaseApi";
+import { FirebaseContext } from "../contexts/FirebaseContext";
+import { UserType } from "../interfaces/User";
 
 export interface IStorePage {}
 
@@ -76,8 +79,13 @@ export const StorePage: React.FunctionComponent<IStorePage> = () => {
   const [isOpen, toggle] = useState(false);
   const [isOkayOpen, toggleOkay] = useState<boolean>(false);
   const [selectedPlant, togglePlant] = useState<PlantType>(plants[0]);
+  const { user, setUser } = useContext(FirebaseContext);
+
+  let usr = user as UserType;
 
   function handleOpenModal(open: boolean, plant: PlantType) {
+    let setUsr = setUser as React.Dispatch<React.SetStateAction<UserType>>;
+    buyPlant(usr, setUsr, plant);
     togglePlant(plant);
     toggle(open);
   }
@@ -90,7 +98,7 @@ export const StorePage: React.FunctionComponent<IStorePage> = () => {
     <div className="container h-screen mx-auto">
       <div className="flex justify-center">
         <h1 className="text-4xl font-mada font-semibold text-gray-700">
-          🌻 Seed Shop
+          {`🌻 Seed Shop, You have: ${usr.coins} 🪙`}
         </h1>
       </div>
       <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 xs:grid-cols-1 gap-8 mt-16 2xl:mx-60">

@@ -8,6 +8,7 @@ import { useLocalStorageState } from "../interfaces/User";
 
 type IFirebaseProvider = {
   user: UserType | React.Dispatch<React.SetStateAction<UserType>>;
+  setUser: UserType | React.Dispatch<React.SetStateAction<UserType>>;
   fetchAllData: () => void;
 };
 
@@ -25,6 +26,7 @@ var defaultUser = {
 
 export const FirebaseContext = React.createContext<IFirebaseProvider>({
   user: defaultUser,
+  setUser: defaultUser,
   fetchAllData: defaultFetch,
 });
 
@@ -41,10 +43,11 @@ export const FirebaseProvider: React.FunctionComponent = (props) => {
 
   const db = firebase.firestore();
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    console.log("use effect inside context");
+  }, []);
 
   const fetchAllData = async (): Promise<void> => {
-    console.log("calling this");
     await db
       .collection(USER_PREFERENCES)
       .doc(auth.currentUser?.email || "")
@@ -73,7 +76,7 @@ export const FirebaseProvider: React.FunctionComponent = (props) => {
   };
 
   return (
-    <FirebaseContext.Provider value={{ user, fetchAllData }}>
+    <FirebaseContext.Provider value={{ user, setUser, fetchAllData }}>
       {props.children}
     </FirebaseContext.Provider>
   );
