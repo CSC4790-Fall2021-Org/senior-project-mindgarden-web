@@ -1,13 +1,13 @@
 import { useState, useEffect } from "react";
 
 export type UserType = {
-  dateJoined: String;
-  name: String;
-  ownedPlants: String;
-  favorited: Array<Number>;
-  coins: Number;
-  totalMins: String;
-  totalSessions: String;
+  dateJoined: string;
+  name: string;
+  ownedPlants: Array<string>;
+  favorited: Array<number>;
+  coins: number;
+  totalMins: string;
+  totalSessions: string;
 };
 
 export const useLocalStorageState = (key: string, defaultVal: UserType) => {

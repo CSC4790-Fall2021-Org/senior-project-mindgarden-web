@@ -9,6 +9,7 @@ import { plants, PlantType } from "../Models/Plant";
 import { buyPlant } from "../services/FirebaseApi";
 import { FirebaseContext } from "../contexts/FirebaseContext";
 import { UserType } from "../interfaces/User";
+import { url } from "inspector";
 
 export interface IStorePage {}
 
@@ -83,14 +84,24 @@ export const StorePage: React.FunctionComponent<IStorePage> = () => {
 
   let usr = user as UserType;
 
+  useEffect(() => {
+    // check to see what plants user has
+    console.log(usr.ownedPlants, "no one");
+  }, []);
+
   function handleOpenModal(open: boolean, plant: PlantType) {
-    let setUsr = setUser as React.Dispatch<React.SetStateAction<UserType>>;
-    buyPlant(usr, setUsr, plant);
     togglePlant(plant);
     toggle(open);
   }
 
-  function handleOpenOkay(close: boolean) {
+  function handleOpenOkay(close: boolean, plant: PlantType) {
+    let setUsr = setUser as React.Dispatch<React.SetStateAction<UserType>>;
+    if (usr.coins > plant.price) {
+      buyPlant(usr, setUsr, plant);
+      usr.coins = usr.coins - plant.price;
+      usr.ownedPlants.push(plant.title);
+      setUsr(usr);
+    }
     toggle(false);
     toggleOkay(close);
   }
@@ -104,8 +115,16 @@ export const StorePage: React.FunctionComponent<IStorePage> = () => {
       <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 xs:grid-cols-1 gap-8 mt-16 2xl:mx-60">
         {plants.map((plant) => (
           <DisplayCard
+            key={plant.title}
             plant={plant}
-            handleOpen={() => handleOpenModal(true, plant)}
+            handleOpen={() =>
+              usr.ownedPlants.filter((p) => p == plant.title).length > 0
+                ? null
+                : handleOpenModal(true, plant)
+            }
+            isBought={
+              usr.ownedPlants.filter((p) => p == plant.title).length > 0
+            }
           />
         ))}
       </div>
@@ -116,7 +135,7 @@ export const StorePage: React.FunctionComponent<IStorePage> = () => {
         isOkay={false}
       >
         <BuyModal
-          toggleOkay={() => handleOpenOkay(true)}
+          toggleOkay={() => handleOpenOkay(true, selectedPlant)}
           plant={selectedPlant}
         />
       </Modal>

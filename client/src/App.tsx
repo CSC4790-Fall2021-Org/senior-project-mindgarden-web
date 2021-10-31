@@ -16,7 +16,6 @@ const App: React.FunctionComponent<IAppProps> = (props) => {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(true);
 
   useEffect(() => {
-    console.log("calling here");
     auth.onAuthStateChanged((firebaseUser) => {
       if (firebaseUser) {
         logging.info("user detected.");

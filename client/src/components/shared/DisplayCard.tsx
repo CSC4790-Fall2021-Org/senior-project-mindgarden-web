@@ -6,6 +6,7 @@ import { PlantType } from "../../Models/Plant";
 interface IDisplayCard {
   handleOpen: () => void;
   plant: PlantType;
+  isBought: Boolean;
 }
 
 export const DisplayCard: React.FunctionComponent<IDisplayCard> = (props) => {
@@ -15,7 +16,11 @@ export const DisplayCard: React.FunctionComponent<IDisplayCard> = (props) => {
       whileHover={{ scale: 1.02 }}
       whileTap={{ scale: 0.9 }}
     >
-      <div className="justify-center h-80 neoShadow items-center flex-col">
+      <div
+        className={`justify-center h-80 neoShadow items-center flex-col ${
+          props.isBought ? "opacity-20" : ""
+        }`}
+      >
         <img
           src={props.plant.packetImage}
           alt="Red Tulips Packet"

@@ -17,7 +17,7 @@ var defaultFetch = () => {};
 var defaultUser = {
   dateJoined: "",
   name: "",
-  ownedPlants: "",
+  ownedPlants: [],
   favorited: [],
   coins: 0,
   totalMins: "",
@@ -34,7 +34,7 @@ export const FirebaseProvider: React.FunctionComponent = (props) => {
   var [user, setUser] = useLocalStorageState("user", {
     dateJoined: "",
     name: "",
-    ownedPlants: "",
+    ownedPlants: [],
     favorited: [],
     coins: 0,
     totalMins: "",
@@ -58,7 +58,7 @@ export const FirebaseProvider: React.FunctionComponent = (props) => {
           let updatedUser: UserType = {
             dateJoined: "",
             name: "",
-            ownedPlants: "",
+            ownedPlants: [],
             favorited: [],
             coins: 0,
             totalMins: "",
@@ -69,6 +69,7 @@ export const FirebaseProvider: React.FunctionComponent = (props) => {
           updatedUser.totalMins = fbData["totalMins"];
           updatedUser.totalSessions = fbData["totalSessions"];
           updatedUser.name = fbData["name"];
+          updatedUser.ownedPlants = fbData["plants"];
           setUser = setUser as React.Dispatch<React.SetStateAction<UserType>>;
           setUser(updatedUser);
         }
