@@ -21,22 +21,41 @@ const HomePage = () => {
           onChange={(event) => setIsChecked(event.currentTarget.checked)}
           checked={isChecked}
         />
-        <div className="flex flex-col items-center justify-center drawer-content">
-          <label
-            htmlFor="my-drawer-2"
-            className="mb-4 btn btn-primary drawer-button lg:hidden"
-          >
-            open menu
-          </label>
-          <div className="hidden text-xs text-center lg:block">
-            Menu is always open on desktop size.
-            <br />
-            Resize the browser to see toggle button on mobile size
-          </div>
-          <div className="text-xs text-center lg:hidden">
-            Menu can be toggled on mobile size.
-            <br />
-            Resize the browser to see fixed sidebar on desktop size
+        <div className="flex flex-col items-center drawer-content">
+          {/* Featured */}
+          <div className="grid lg:grid-cols-4 md:grid-cols-4 grid-cols-2 gap-4 w-full lg:px-24 md:px-12 px-4 h-1/2 mt-8 lg:gap-x-16">
+            <div className="col-span-2 neoShadow lg:h-1/2 md:h-3/5 h-full lg:p-8 p-4">
+              <div className="block">
+                <div className="font-bold font-mada text-3xl">
+                  Open-Ended Meditation
+                </div>
+                <div className="font-mada text-2xl">Featured</div>
+              </div>
+              <div>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-1/2 w-1/2 neoShadow"
+                  viewBox="0 0 20 20"
+                  fill="green"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              </div>
+            </div>
+            <div className="col-span-1">3</div>
+            <div className="col-span-1">
+              <label
+                htmlFor="my-drawer-2"
+                className="mb-4 btn btn-primary drawer-button lg:hidden"
+              >
+                Categories
+              </label>
+              4
+            </div>
           </div>
         </div>
         <div className="drawer-side shadow-2xl bg-darkWhite w-full rounded-3xl drop-shadow ">
@@ -53,7 +72,7 @@ const HomePage = () => {
               }
             }}
           ></label>
-          <ul className="menu p-4 overflow-y-auto w-80 text-base-content rounded-3xl shadow-2xl ">
+          <ul className="menu p-4 overflow-y-auto w-80 text-base-content rounded-3xl shadow-2xl bg-darkWhite ">
             <li>
               <motion.button
                 whileHover={{ scale: 1.02 }}

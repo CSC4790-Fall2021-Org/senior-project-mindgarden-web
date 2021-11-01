@@ -5,6 +5,7 @@ import { IGoBack } from "../../components/Profile/StatsComponent";
 import { auth } from "../../config/firebase";
 import logging from "../../config/logging";
 import { Page } from "../Profile/ProfilePage";
+import HomePlay from "../../../public/images/homePlay.svg";
 
 interface FormData {
   password: string;
