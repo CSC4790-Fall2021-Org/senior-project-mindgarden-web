@@ -6,6 +6,7 @@ import { FirebaseContext } from "../contexts/FirebaseContext";
 
 const HomePage = () => {
   const [isChecked, setIsChecked] = useState(false);
+  const [category, setCategory] = useState("");
   const { user, fetchAllData } = useContext(FirebaseContext);
   useEffect(() => {
     fetchAllData();
@@ -23,18 +24,63 @@ const HomePage = () => {
         />
         <div className="flex flex-col items-center drawer-content">
           {/* Featured */}
-          <div className="grid lg:grid-cols-4 md:grid-cols-4 grid-cols-2 gap-4 w-full lg:px-24 md:px-12 px-4 h-1/2 mt-8 lg:gap-x-16">
-            <div className="col-span-2 neoShadow lg:h-1/2 md:h-3/5 h-full lg:p-8 p-4">
+          <div className="grid lg:grid-cols-4 md:grid-cols-4 grid-cols-2 gap-4 xs:gap-2 w-full lg:px-24 md:px-12 px-4 h-1/2 mt-8 lg:gap-x-8 flex xs:justify-center">
+            <div className="col-span-2 neoShadow lg:h-1/2 md:h-3/5 h-full p-6 relative">
               <div className="block">
-                <div className="font-bold font-mada text-3xl">
+                <div className="font-bold font-mada lg:text-4xl md:text-4xl text-2xl w-3/4">
                   Open-Ended Meditation
                 </div>
-                <div className="font-mada text-2xl">Featured</div>
               </div>
+              <img
+                src="/images/cloud.svg"
+                alt="cloud"
+                className="w-2/5 pt-8 absolute left-1/2 bottom-4  right xs:w-1/3"
+              />
+            </div>
+            <div className="col-span-1 lg:h-1/2 md:h-3/5 h-full  flex-col justify-between neoShadow p-4">
               <div>
+                <div className="font-mada text-3xl font-semibold text-green-700 ">
+                  Featured
+                </div>
+                <div className="font-mada lg:text-sm text-xs">
+                  loorem ipsum loorem ipsum loorem ipsum loorem ipsumloorem
+                  ipsum loorem ipsum loorem ipsum loorem ipsum loorem ipsum
+                  loorem ipsum loorem ipsum
+                </div>
+              </div>
+              <div className="font-mada font-semibold text-lg flex items-center">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="h-1/2 w-1/2 neoShadow"
+                  className="h-6 w-6 mr-1"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
+                20 mins
+                <div className="font-bold ml-2 text-green-700">Type:</div>
+              </div>
+            </div>
+            <div className="col-span-1 lg:h-1/2 md:h-3/5 h-full justify-center flex flex-col">
+              <label
+                htmlFor="my-drawer-2"
+                className="mb-4 btn btn-primary drawer-button lg:hidden"
+              >
+                Categories
+              </label>
+              <div className="flex flex-col neoShadow items-center p-4 justify-center">
+                <div className="text-2xl font-semibold font-mada">
+                  Play Meditation
+                </div>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-1/2 w-1/2"
                   viewBox="0 0 20 20"
                   fill="green"
                 >
@@ -45,16 +91,6 @@ const HomePage = () => {
                   />
                 </svg>
               </div>
-            </div>
-            <div className="col-span-1">3</div>
-            <div className="col-span-1">
-              <label
-                htmlFor="my-drawer-2"
-                className="mb-4 btn btn-primary drawer-button lg:hidden"
-              >
-                Categories
-              </label>
-              4
             </div>
           </div>
         </div>
@@ -77,11 +113,38 @@ const HomePage = () => {
               <motion.button
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.9 }}
-                className="active:bg-green-700 h-10 justify-center items-center neoShadow font-mada mt-4 border-2 border-green-700"
+                className={
+                  "h-10 justify-center items-center neoShadow font-mada mt-4 border-2 border-green-700" +
+                  (category === "home" ? "border-yellow-700" : "")
+                }
+                onClick={() => setCategory("home")}
+              >
+                {" "}
+                <div
+                  className={
+                    "w-32 justify-start flex font-semibold text-gray-600" +
+                    (category === "home" ? " text-green-700" : "")
+                  }
+                >
+                  🏠&nbsp;&nbsp;&nbsp;&nbsp;Home
+                </div>
+              </motion.button>
+            </li>
+            <li>
+              <motion.button
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.9 }}
+                className={
+                  "h-10 justify-center items-center neoShadow font-mada mt-4 border-2 border-green-700" +
+                  (category === "all" ? "border-yellow-700" : "")
+                }
+                onClick={() => setCategory("all")}
               >
                 <div
-                  className="w-30
-                 justify-start flex font-semibold text-green-700"
+                  className={
+                    "w-30 justify-start flex font-semibold text-gray-600" +
+                    (category === "all" ? " text-green-700" : "")
+                  }
                 >
                   🧘‍♂️ &nbsp;&nbsp;All Meditations
                 </div>
@@ -91,10 +154,19 @@ const HomePage = () => {
               <motion.button
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.9 }}
-                className="active:bg-green-700 h-10 justify-center items-center neoShadow font-mada mt-4 border-2 border-green-700"
+                className={
+                  "h-10 justify-center items-center neoShadow font-mada mt-4 border-2 border-green-700" +
+                  (category === "Courses" ? "border-yellow-700" : "")
+                }
+                onClick={() => setCategory("Courses")}
               >
                 {" "}
-                <div className="w-32 justify-start flex font-semibold text-green-700">
+                <div
+                  className={
+                    "w-32 justify-start flex font-semibold text-gray-600" +
+                    (category === "Courses" ? " text-green-700" : "")
+                  }
+                >
                   👨‍🏫&nbsp;&nbsp;&nbsp;&nbsp;Courses
                 </div>
               </motion.button>
@@ -103,10 +175,19 @@ const HomePage = () => {
               <motion.button
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.9 }}
-                className="active:bg-green-700 h-10 justify-center items-center neoShadow font-mada mt-4 border-2 border-green-700"
+                className={
+                  "h-10 justify-center items-center neoShadow font-mada mt-4 border-2 border-green-700" +
+                  (category === "Unguided" ? "border-yellow-700" : "")
+                }
+                onClick={() => setCategory("Unguided")}
               >
                 {" "}
-                <div className="w-32 justify-start flex font-semibold text-green-700">
+                <div
+                  className={
+                    "w-32 justify-start flex font-semibold text-gray-600" +
+                    (category === "Unguided" ? " text-green-700" : "")
+                  }
+                >
                   🕒&nbsp;&nbsp;&nbsp;&nbsp;Unguided
                 </div>
               </motion.button>
@@ -115,9 +196,18 @@ const HomePage = () => {
               <motion.button
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.9 }}
-                className="active:bg-green-700 h-10 justify-center items-center neoShadow font-mada mt-4 border-2 border-green-700"
+                className={
+                  "h-10 justify-center items-center neoShadow font-mada mt-4 border-2 border-green-700" +
+                  (category === "Sleep" ? "border-yellow-700" : "")
+                }
+                onClick={() => setCategory("Sleep")}
               >
-                <div className="w-32 justify-start flex font-semibold text-green-700">
+                <div
+                  className={
+                    "w-32 justify-start flex font-semibold text-gray-600" +
+                    (category === "Sleep" ? " text-green-700" : "")
+                  }
+                >
                   🌜&nbsp;&nbsp;&nbsp;&nbsp;Sleep
                 </div>
               </motion.button>
@@ -126,10 +216,19 @@ const HomePage = () => {
               <motion.button
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.9 }}
-                className="active:bg-green-700 h-10 justify-center items-center neoShadow font-mada mt-4 border-2 border-green-700"
+                className={
+                  "h-10 justify-center items-center neoShadow font-mada mt-4 border-2 border-green-700" +
+                  (category === "Focus" ? "border-yellow-700" : "")
+                }
+                onClick={() => setCategory("Focus")}
               >
                 {" "}
-                <div className="w-32 justify-start flex font-semibold text-green-700">
+                <div
+                  className={
+                    "w-32 justify-start flex font-semibold text-gray-600" +
+                    (category === "Focus" ? " text-green-700" : "")
+                  }
+                >
                   🔎 &nbsp;&nbsp;Focus
                 </div>
               </motion.button>
@@ -138,10 +237,19 @@ const HomePage = () => {
               <motion.button
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.9 }}
-                className="active:bg-green-700 h-10 justify-center items-center neoShadow font-mada mt-4 border-2 border-green-700 text-green-700"
+                className={
+                  "h-10 justify-center items-center neoShadow font-mada mt-4 border-2 border-green-700" +
+                  (category === "Anxiety" ? "border-yellow-700" : "")
+                }
+                onClick={() => setCategory("Anxiety")}
               >
                 {" "}
-                <div className="w-32 justify-start flex font-semibold">
+                <div
+                  className={
+                    "w-32 justify-start flex font-semibold text-gray-600" +
+                    (category === "Anxiety" ? " text-green-700" : "")
+                  }
+                >
                   😥 &nbsp;&nbsp;Anxiety
                 </div>
               </motion.button>
@@ -150,10 +258,19 @@ const HomePage = () => {
               <motion.button
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.9 }}
-                className="active:bg-green-700 h-10 justify-center items-center neoShadow font-mada mt-4 border-2 border-green-700 "
+                className={
+                  "h-10 justify-center items-center neoShadow font-mada mt-4 border-2 border-green-700" +
+                  (category === "Growth" ? "border-yellow-700" : "")
+                }
+                onClick={() => setCategory("Growth")}
               >
                 {" "}
-                <div className="w-32 justify-start flex font-semibold text-green-700">
+                <div
+                  className={
+                    "w-32 justify-start flex font-semibold text-gray-600" +
+                    (category === "Growth" ? " text-green-700" : "")
+                  }
+                >
                   🪴&nbsp;&nbsp;Growth
                 </div>
               </motion.button>
