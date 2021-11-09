@@ -3,10 +3,11 @@ import { Link } from "react-router-dom";
 import { LogoutButton } from "../components/Authentication/LogoutButton";
 import { motion } from "framer-motion";
 import { FirebaseContext } from "../contexts/FirebaseContext";
+import { MeditationTile } from "../components/shared/MeditationTile";
 
 const HomePage = () => {
   const [isChecked, setIsChecked] = useState(false);
-  const [category, setCategory] = useState("");
+  const [category, setCategory] = useState("home");
   const { user, fetchAllData } = useContext(FirebaseContext);
   useEffect(() => {
     fetchAllData();
@@ -49,9 +50,10 @@ const HomePage = () => {
                 </div>
               </div>
               <div className="font-mada font-semibold text-lg flex items-center">
+                20
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="h-6 w-6 mr-1"
+                  className="h-4 w-4"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -63,8 +65,9 @@ const HomePage = () => {
                     d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
                   />
                 </svg>
-                20 mins
+                <div className="text-sm ml-1">mins</div>
                 <div className="font-bold ml-2 text-green-700">Type:</div>
+                <div className="font-mada ml-1 font-semibold"></div>
               </div>
             </div>
             <div className="col-span-1 lg:h-1/2 md:h-3/5 h-full justify-center flex flex-col">
@@ -93,7 +96,140 @@ const HomePage = () => {
               </div>
             </div>
           </div>
+
+          <div className="flex justify-start items-start h-1/2 w-full lg:px-24 md:px-12 px-4 xs:mt-4 -mt-40 flex-col">
+            <div className="font-bold font-mada text-3xl ">⏮ Recent</div>
+            <div className="flex w-full">
+              <MeditationTile
+                title={"Gain Confience"}
+                img={"bee.svg"}
+                duration={20}
+                type={"Single"}
+                desc={
+                  "Learn to feel confidence and break away from your negative thought patterns"
+                }
+                isGrid={false}
+              />
+              <MeditationTile
+                title={"Gain Confience"}
+                img={"candle.svg"}
+                duration={10}
+                type={"Single"}
+                desc={
+                  "Learn to feel confidence and break away from your negative thought patterns"
+                }
+                isGrid={false}
+              />
+              <MeditationTile
+                title={"Gain Confience"}
+                img={"brain.svg"}
+                duration={20}
+                type={"Single"}
+                desc={
+                  "Learn to feel confidence and break away from your negative thought patterns"
+                }
+                isGrid={false}
+              />
+            </div>
+            <div className="font-bold font-mada text-3xl -mt-10">
+              💚 Favorited
+            </div>
+            <div className="grid lg:grid-cols-4 md:grid-cols-4 grid-cols-2 gap-4 xs:gap-2 w-full auto-rows-fr items-start row-span-full grid-rows-3 h-full">
+              <MeditationTile
+                title={"Gain Confience"}
+                img={"candle.svg"}
+                duration={10}
+                type={"Single"}
+                desc={
+                  "Learn to feel confidence and break away from your negative thought patterns"
+                }
+                isGrid={true}
+              />
+              <MeditationTile
+                title={"Gain Confience"}
+                img={"brain.svg"}
+                duration={20}
+                type={"Single"}
+                desc={
+                  "Learn to feel confidence and break away from your negative thought patterns"
+                }
+                isGrid={true}
+              />
+              <MeditationTile
+                title={"Gain Confience"}
+                img={"brain.svg"}
+                duration={20}
+                type={"Single"}
+                desc={
+                  "Learn to feel confidence and break away from your negative thought patterns"
+                }
+                isGrid={true}
+              />
+              <MeditationTile
+                title={"Gain Confience"}
+                img={"brain.svg"}
+                duration={20}
+                type={"Single"}
+                desc={
+                  "Learn to feel confidence and break away from your negative thought patterns"
+                }
+                isGrid={true}
+              />
+              <MeditationTile
+                title={"Gain Confience"}
+                img={"bee.svg"}
+                duration={20}
+                type={"Single"}
+                desc={
+                  "Learn to feel confidence and break away from your negative thought patterns"
+                }
+                isGrid={true}
+              />
+              <MeditationTile
+                title={"Gain Confience"}
+                img={"bee.svg"}
+                duration={20}
+                type={"Single"}
+                desc={
+                  "Learn to feel confidence and break away from your negative thought patterns"
+                }
+                isGrid={true}
+              />
+              <MeditationTile
+                title={"Gain Confience"}
+                img={"bee.svg"}
+                duration={20}
+                type={"Single"}
+                desc={
+                  "Learn to feel confidence and break away from your negative thought patterns"
+                }
+                isGrid={true}
+              />
+              <MeditationTile
+                title={"Gain Confience"}
+                img={"bee.svg"}
+                duration={20}
+                type={"Single"}
+                desc={
+                  "Learn to feel confidence and break away from your negative thought patterns"
+                }
+                isGrid={true}
+              />
+              <MeditationTile
+                title={"Gain Confience"}
+                img={"bee.svg"}
+                duration={20}
+                type={"Single"}
+                desc={
+                  "Learn to feel confidence and break away from your negative thought patterns"
+                }
+                isGrid={true}
+              />
+            </div>
+          </div>
         </div>
+
+        {/* Drawer */}
         <div className="drawer-side shadow-2xl bg-darkWhite w-full rounded-3xl drop-shadow ">
           <label
             htmlFor="my-drawer-2"
