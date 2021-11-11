@@ -4,13 +4,23 @@ import { LogoutButton } from "../components/Authentication/LogoutButton";
 import { motion } from "framer-motion";
 import { FirebaseContext } from "../contexts/FirebaseContext";
 import { MeditationTile } from "../components/shared/MeditationTile";
+import { Category, Meditation, meditations, Type } from "../Models/Meditation";
 
 const HomePage = () => {
   const [isChecked, setIsChecked] = useState(false);
   const [category, setCategory] = useState("home");
   const { user, fetchAllData } = useContext(FirebaseContext);
+  const [recentMeds, setRecentMeds] = useState<Array<Meditation>>();
+  const [favMeds, setFavMeds] = useState<Array<Meditation>>();
+  const [meds, setMeds] = useState<Array<Meditation>>();
+
   useEffect(() => {
     fetchAllData();
+    const meds = meditations.slice(3, 7);
+    setRecentMeds(meds);
+    const favMeds = meditations.slice(6, 12);
+    setFavMeds(favMeds);
+    setMeds(meditations);
   }, []);
 
   return (
@@ -23,212 +33,113 @@ const HomePage = () => {
           onChange={(event) => setIsChecked(event.currentTarget.checked)}
           checked={isChecked}
         />
-        <div className="flex flex-col items-center drawer-content">
-          {/* Featured */}
-          <div className="grid lg:grid-cols-4 md:grid-cols-4 grid-cols-2 gap-4 xs:gap-2 w-full lg:px-24 md:px-12 px-4 h-1/2 mt-8 lg:gap-x-8 flex xs:justify-center">
-            <div className="col-span-2 neoShadow lg:h-1/2 md:h-3/5 h-full p-6 relative">
-              <div className="block">
-                <div className="font-bold font-mada lg:text-4xl md:text-4xl text-2xl w-3/4">
-                  Open-Ended Meditation
+        {/* Featured */}
+        {category === "home" ? (
+          <div className="flex flex-col items-center drawer-content">
+            <div className="grid lg:grid-cols-4 md:grid-cols-4 grid-cols-2 gap-4 xs:gap-2 w-full lg:px-24 md:px-12 px-4 h-1/2 mt-8 lg:gap-x-8 flex xs:justify-center">
+              <div className="col-span-2 neoShadow lg:h-1/2 md:h-3/5 h-full p-6 relative">
+                <div className="block">
+                  <div className="font-bold font-mada lg:text-4xl md:text-4xl text-2xl w-3/4">
+                    Open-Ended Meditation
+                  </div>
+                </div>
+                <img
+                  src="/images/cloud.svg"
+                  alt="cloud"
+                  className="w-2/5 pt-8 absolute left-1/2 bottom-4  right xs:w-1/3"
+                />
+              </div>
+              <div className="col-span-1 lg:h-1/2 md:h-3/5 h-full  flex-col justify-between neoShadow p-4">
+                <div>
+                  <div className="font-mada text-3xl font-semibold text-green-700 ">
+                    Featured
+                  </div>
+                  <div className="font-mada lg:text-sm text-xs">
+                    loorem ipsum loorem ipsum loorem ipsum loorem ipsumloorem
+                    ipsum loorem ipsum loorem ipsum loorem ipsum loorem ipsum
+                    loorem ipsum loorem ipsum
+                  </div>
+                </div>
+                <div className="font-mada font-semibold text-lg flex items-center">
+                  20
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-4 w-4"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                    />
+                  </svg>
+                  <div className="text-sm ml-1">mins</div>
+                  <div className="font-bold ml-2 text-green-700">Type:</div>
+                  <div className="font-mada ml-1 font-semibold">Course</div>
                 </div>
               </div>
-              <img
-                src="/images/cloud.svg"
-                alt="cloud"
-                className="w-2/5 pt-8 absolute left-1/2 bottom-4  right xs:w-1/3"
-              />
-            </div>
-            <div className="col-span-1 lg:h-1/2 md:h-3/5 h-full  flex-col justify-between neoShadow p-4">
-              <div>
-                <div className="font-mada text-3xl font-semibold text-green-700 ">
-                  Featured
-                </div>
-                <div className="font-mada lg:text-sm text-xs">
-                  loorem ipsum loorem ipsum loorem ipsum loorem ipsumloorem
-                  ipsum loorem ipsum loorem ipsum loorem ipsum loorem ipsum
-                  loorem ipsum loorem ipsum
-                </div>
-              </div>
-              <div className="font-mada font-semibold text-lg flex items-center">
-                20
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-4 w-4"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
+              <div className="col-span-1 lg:h-1/2 md:h-3/5 h-full justify-center flex flex-col">
+                <label
+                  htmlFor="my-drawer-2"
+                  className="mb-4 btn btn-primary drawer-button lg:hidden"
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                  />
-                </svg>
-                <div className="text-sm ml-1">mins</div>
-                <div className="font-bold ml-2 text-green-700">Type:</div>
-                <div className="font-mada ml-1 font-semibold"></div>
+                  Categories
+                </label>
+                <div className="flex flex-col neoShadow items-center p-4 justify-center">
+                  <div className="text-2xl font-semibold font-mada">
+                    Play Meditation
+                  </div>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-1/2 w-1/2"
+                    viewBox="0 0 20 20"
+                    fill="green"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                </div>
               </div>
             </div>
-            <div className="col-span-1 lg:h-1/2 md:h-3/5 h-full justify-center flex flex-col">
-              <label
-                htmlFor="my-drawer-2"
-                className="mb-4 btn btn-primary drawer-button lg:hidden"
-              >
-                Categories
-              </label>
-              <div className="flex flex-col neoShadow items-center p-4 justify-center">
-                <div className="text-2xl font-semibold font-mada">
-                  Play Meditation
-                </div>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-1/2 w-1/2"
-                  viewBox="0 0 20 20"
-                  fill="green"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z"
-                    clipRule="evenodd"
-                  />
-                </svg>
+
+            <div className="flex justify-start items-start h-1/2 w-full lg:px-24 md:px-12 px-4 xs:mt-4 -mt-40 flex-col">
+              <div className="font-bold font-mada text-3xl ">⏮ Recent</div>
+              <div className="flex w-full">
+                {recentMeds?.map((med) => (
+                  <MeditationTile med={med} isGrid={false} />
+                ))}
+              </div>
+              <div className="font-bold font-mada text-3xl ">💚 Favorited</div>
+              <div className="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-4 xs:gap-2 w-full auto-rows-fr items-start row-span-full grid-rows-2 h-5/6 pb-8">
+                {favMeds?.map((med) => (
+                  <MeditationTile med={med} isGrid={true} />
+                ))}
               </div>
             </div>
           </div>
-
-          <div className="flex justify-start items-start h-1/2 w-full lg:px-24 md:px-12 px-4 xs:mt-4 -mt-40 flex-col">
-            <div className="font-bold font-mada text-3xl ">⏮ Recent</div>
-            <div className="flex w-full">
-              <MeditationTile
-                title={"Gain Confience"}
-                img={"bee.svg"}
-                duration={20}
-                type={"Single"}
-                desc={
-                  "Learn to feel confidence and break away from your negative thought patterns"
-                }
-                isGrid={false}
-              />
-              <MeditationTile
-                title={"Gain Confience"}
-                img={"candle.svg"}
-                duration={10}
-                type={"Single"}
-                desc={
-                  "Learn to feel confidence and break away from your negative thought patterns"
-                }
-                isGrid={false}
-              />
-              <MeditationTile
-                title={"Gain Confience"}
-                img={"brain.svg"}
-                duration={20}
-                type={"Single"}
-                desc={
-                  "Learn to feel confidence and break away from your negative thought patterns"
-                }
-                isGrid={false}
-              />
-            </div>
-            <div className="font-bold font-mada text-3xl -mt-10">
-              💚 Favorited
-            </div>
-            <div className="grid lg:grid-cols-4 md:grid-cols-4 grid-cols-2 gap-4 xs:gap-2 w-full auto-rows-fr items-start row-span-full grid-rows-3 h-full">
-              <MeditationTile
-                title={"Gain Confience"}
-                img={"candle.svg"}
-                duration={10}
-                type={"Single"}
-                desc={
-                  "Learn to feel confidence and break away from your negative thought patterns"
-                }
-                isGrid={true}
-              />
-              <MeditationTile
-                title={"Gain Confience"}
-                img={"brain.svg"}
-                duration={20}
-                type={"Single"}
-                desc={
-                  "Learn to feel confidence and break away from your negative thought patterns"
-                }
-                isGrid={true}
-              />
-              <MeditationTile
-                title={"Gain Confience"}
-                img={"brain.svg"}
-                duration={20}
-                type={"Single"}
-                desc={
-                  "Learn to feel confidence and break away from your negative thought patterns"
-                }
-                isGrid={true}
-              />
-              <MeditationTile
-                title={"Gain Confience"}
-                img={"brain.svg"}
-                duration={20}
-                type={"Single"}
-                desc={
-                  "Learn to feel confidence and break away from your negative thought patterns"
-                }
-                isGrid={true}
-              />
-              <MeditationTile
-                title={"Gain Confience"}
-                img={"bee.svg"}
-                duration={20}
-                type={"Single"}
-                desc={
-                  "Learn to feel confidence and break away from your negative thought patterns"
-                }
-                isGrid={true}
-              />
-              <MeditationTile
-                title={"Gain Confience"}
-                img={"bee.svg"}
-                duration={20}
-                type={"Single"}
-                desc={
-                  "Learn to feel confidence and break away from your negative thought patterns"
-                }
-                isGrid={true}
-              />
-              <MeditationTile
-                title={"Gain Confience"}
-                img={"bee.svg"}
-                duration={20}
-                type={"Single"}
-                desc={
-                  "Learn to feel confidence and break away from your negative thought patterns"
-                }
-                isGrid={true}
-              />
-              <MeditationTile
-                title={"Gain Confience"}
-                img={"bee.svg"}
-                duration={20}
-                type={"Single"}
-                desc={
-                  "Learn to feel confidence and break away from your negative thought patterns"
-                }
-                isGrid={true}
-              />
-              <MeditationTile
-                title={"Gain Confience"}
-                img={"bee.svg"}
-                duration={20}
-                type={"Single"}
-                desc={
-                  "Learn to feel confidence and break away from your negative thought patterns"
-                }
-                isGrid={true}
-              />
+        ) : (
+          <div className="flex flex-col items-center drawer-content">
+            <div
+              className={`grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-4 xs:gap-2 w-full auto-rows-fr items-start row-span-full grid-rows-2 px-16 pb-8 ${
+                (meds?.length ?? 0) <= 6
+                  ? (meds?.length ?? 0) <= 4
+                    ? "h-1/2"
+                    : "h-1/2"
+                  : "h-full"
+              }`}
+            >
+              {meds?.map((med) => (
+                <MeditationTile med={med} isGrid={true} />
+              ))}
             </div>
           </div>
-        </div>
-
+        )}
         {/* Drawer */}
         <div className="drawer-side shadow-2xl bg-darkWhite w-full rounded-3xl drop-shadow ">
           <label
@@ -274,7 +185,10 @@ const HomePage = () => {
                   "h-10 justify-center items-center neoShadow font-mada mt-4 border-2 border-green-700" +
                   (category === "all" ? "border-yellow-700" : "")
                 }
-                onClick={() => setCategory("all")}
+                onClick={() => {
+                  setCategory("all");
+                  setMeds(meditations);
+                }}
               >
                 <div
                   className={
@@ -294,7 +208,12 @@ const HomePage = () => {
                   "h-10 justify-center items-center neoShadow font-mada mt-4 border-2 border-green-700" +
                   (category === "Courses" ? "border-yellow-700" : "")
                 }
-                onClick={() => setCategory("Courses")}
+                onClick={() => {
+                  setCategory("Courses");
+                  setMeds(
+                    meditations.filter((med) => med.type === Type.course)
+                  );
+                }}
               >
                 {" "}
                 <div
@@ -315,7 +234,14 @@ const HomePage = () => {
                   "h-10 justify-center items-center neoShadow font-mada mt-4 border-2 border-green-700" +
                   (category === "Unguided" ? "border-yellow-700" : "")
                 }
-                onClick={() => setCategory("Unguided")}
+                onClick={() => {
+                  setMeds(
+                    meditations.filter(
+                      (med) => med.category === Category.unguided
+                    )
+                  );
+                  setCategory("Unguided");
+                }}
               >
                 {" "}
                 <div
@@ -336,7 +262,12 @@ const HomePage = () => {
                   "h-10 justify-center items-center neoShadow font-mada mt-4 border-2 border-green-700" +
                   (category === "Sleep" ? "border-yellow-700" : "")
                 }
-                onClick={() => setCategory("Sleep")}
+                onClick={() => {
+                  setMeds(
+                    meditations.filter((med) => med.category === Category.sleep)
+                  );
+                  setCategory("Sleep");
+                }}
               >
                 <div
                   className={
@@ -356,7 +287,12 @@ const HomePage = () => {
                   "h-10 justify-center items-center neoShadow font-mada mt-4 border-2 border-green-700" +
                   (category === "Focus" ? "border-yellow-700" : "")
                 }
-                onClick={() => setCategory("Focus")}
+                onClick={() => {
+                  setMeds(
+                    meditations.filter((med) => med.category === Category.focus)
+                  );
+                  setCategory("Focus");
+                }}
               >
                 {" "}
                 <div
@@ -377,7 +313,14 @@ const HomePage = () => {
                   "h-10 justify-center items-center neoShadow font-mada mt-4 border-2 border-green-700" +
                   (category === "Anxiety" ? "border-yellow-700" : "")
                 }
-                onClick={() => setCategory("Anxiety")}
+                onClick={() => {
+                  setMeds(
+                    meditations.filter(
+                      (med) => med.category === Category.anxiety
+                    )
+                  );
+                  setCategory("Anxiety");
+                }}
               >
                 {" "}
                 <div
@@ -398,7 +341,14 @@ const HomePage = () => {
                   "h-10 justify-center items-center neoShadow font-mada mt-4 border-2 border-green-700" +
                   (category === "Growth" ? "border-yellow-700" : "")
                 }
-                onClick={() => setCategory("Growth")}
+                onClick={() => {
+                  setMeds(
+                    meditations.filter(
+                      (med) => med.category === Category.growth
+                    )
+                  );
+                  setCategory("Growth");
+                }}
               >
                 {" "}
                 <div
