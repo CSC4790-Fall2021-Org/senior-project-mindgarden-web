@@ -88,54 +88,85 @@ const HomePage = () => {
                 >
                   Categories
                 </label>
-                <div className="flex flex-col neoShadow items-center p-4 justify-center">
-                  <div className="text-2xl font-semibold font-mada">
-                    Play Meditation
+                <motion.button
+                  onClick={() => console.log("bing")}
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.9 }}
+                >
+                  <div className="flex flex-col neoShadow items-center p-4 justify-center">
+                    <div className="text-2xl font-semibold font-mada">
+                      Play Meditation
+                    </div>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-1/2 w-1/2"
+                      viewBox="0 0 20 20"
+                      fill="green"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
                   </div>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-1/2 w-1/2"
-                    viewBox="0 0 20 20"
-                    fill="green"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                </div>
+                </motion.button>
               </div>
             </div>
 
-            <div className="flex justify-start items-start h-1/2 w-full lg:px-24 md:px-12 px-4 xs:mt-4 -mt-40 flex-col">
-              <div className="font-bold font-mada text-3xl ">⏮ Recent</div>
-              <div className="flex w-full">
+            <div className="flex justify-start items-start h-1/2 w-full lg:px-24 md:px-12 px-4 xs:mt-4 -mt-40 flex-col ">
+              <div className="font-bold font-mada text-3xl -mb-4 ">
+                ⏮ Recent
+              </div>
+              <div className="flex w-full justify-start items-start">
                 {recentMeds?.map((med) => (
-                  <MeditationTile med={med} isGrid={false} />
+                  <motion.button
+                    onClick={() => console.log("bing")}
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.9 }}
+                    className={`${"w-full md:w-full xs:w-full"}  " h-full mr-4 xs:mr-4 justify-start"`}
+                  >
+                    <MeditationTile med={med} isGrid={false} />
+                  </motion.button>
                 ))}
               </div>
-              <div className="font-bold font-mada text-3xl ">💚 Favorited</div>
-              <div className="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-4 xs:gap-2 w-full auto-rows-fr items-start row-span-full grid-rows-2 h-5/6 pb-8">
+              <div className="font-bold font-mada text-3xl mt-8">
+                💚 Favorited
+              </div>
+              <div className="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-4 xs:gap-2 w-full auto-rows-fr items-start row-span-full grid-rows-2 h-5/6 pb-12">
                 {favMeds?.map((med) => (
-                  <MeditationTile med={med} isGrid={true} />
+                  <motion.button
+                    onClick={() => console.log("bing")}
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.9 }}
+                    className={`${"w-full h-full"}  " h-4/5 mt-4 mr-4 xs:mr-4  xs:h-2/3"`}
+                  >
+                    <MeditationTile med={med} isGrid={true} />
+                  </motion.button>
                 ))}
               </div>
             </div>
           </div>
         ) : (
-          <div className="flex flex-col items-center drawer-content">
+          <div className="flex flex-col items-center drawer-content w-full">
             <div
-              className={`grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-4 xs:gap-2 w-full auto-rows-fr items-start row-span-full grid-rows-2 px-16 pb-8 ${
+              className={`grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-4 xs:gap-2 w-full items-start px-16 pb-8 xs:px-0 ${
                 (meds?.length ?? 0) <= 6
                   ? (meds?.length ?? 0) <= 4
-                    ? "h-1/2"
-                    : "h-1/2"
-                  : "h-full"
-              }`}
+                    ? "h-1/2 row-span-2 grid-rows-2 auto-rows-fr "
+                    : "h-1/2 auto-rows-fr "
+                  : "h-full row-span-1 auto-rows-fr xs:auto-rows-max"
+              } xs:h-full`}
             >
               {meds?.map((med) => (
-                <MeditationTile med={med} isGrid={true} />
+                <motion.button
+                  onClick={() => console.log("bing")}
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.9 }}
+                  className={`${"w-full h-full"}  " h-4/5 mt-4 mr-4 xs:mr-4  xs:h-2/3"`}
+                >
+                  <MeditationTile med={med} isGrid={true} />
+                </motion.button>
               ))}
             </div>
           </div>

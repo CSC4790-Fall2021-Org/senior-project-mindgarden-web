@@ -97,9 +97,9 @@ export const StorePage: React.FunctionComponent<IStorePage> = () => {
   function handleOpenOkay(close: boolean, plant: PlantType) {
     let setUsr = setUser as React.Dispatch<React.SetStateAction<UserType>>;
     if (usr.coins > plant.price) {
-      buyPlant(usr, setUsr, plant);
       usr.coins = usr.coins - plant.price;
       usr.ownedPlants.push(plant.title);
+      buyPlant(usr, setUsr, plant);
       setUsr(usr);
     }
     toggle(false);
@@ -118,12 +118,12 @@ export const StorePage: React.FunctionComponent<IStorePage> = () => {
             key={plant.title}
             plant={plant}
             handleOpen={() =>
-              usr.ownedPlants.filter((p) => p == plant.title).length > 0
+              usr.ownedPlants.filter((p) => p === plant.title).length > 0
                 ? null
                 : handleOpenModal(true, plant)
             }
             isBought={
-              usr.ownedPlants.filter((p) => p == plant.title).length > 0
+              usr.ownedPlants.filter((p) => p === plant.title).length > 0
             }
           />
         ))}

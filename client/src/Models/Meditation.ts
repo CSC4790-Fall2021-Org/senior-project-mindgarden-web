@@ -158,19 +158,19 @@ export let meditations: Array<Meditation> = [
     reward: 5,
     url: "https://mcdn.podbean.com/mf/web/tr4dnq/1403_How_To_Meditate_VOCALSbrsfv.mp3",
   },
-  {
-    title: "Relieve Anxiety",
-    description:
-      "In this guided meditation gain control over your anxiety & experience peace and calmness.",
-    belongsTo: "none",
-    category: Category.anxiety,
-    img: "cloud.svg",
-    type: Type.single,
-    id: 46,
-    duration: 609,
-    reward: 10,
-    url: "https://mcdn.podbean.com/mf/web/y39bbt/1432_Guided_Meditation_for_Anxiety_10_min_VOCALSajbr7.mp3",
-  },
+  // {
+  //   title: "Relieve Anxiety",
+  //   description:
+  //     "In this guided meditation gain control over your anxiety & experience peace and calmness.",
+  //   belongsTo: "none",
+  //   category: Category.anxiety,
+  //   img: "cloud.svg",
+  //   type: Type.single,
+  //   id: 46,
+  //   duration: 609,
+  //   reward: 10,
+  //   url: "https://mcdn.podbean.com/mf/web/y39bbt/1432_Guided_Meditation_for_Anxiety_10_min_VOCALSajbr7.mp3",
+  // },
   {
     title: "Good Morning, Positive Energy",
     description:

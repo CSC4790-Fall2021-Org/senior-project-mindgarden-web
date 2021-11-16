@@ -13,15 +13,15 @@ export const MeditationTile: React.FunctionComponent<IMeditationTile> = (
   return (
     <div
       className={`${
-        props.isGrid ? "w-full h-full" : "w-32 md:w-72 xs:w-1/2"
+        props.isGrid ? "w-full h-full" : "w-32 md:w-72 xs:w-full"
       }  " h-4/5 mt-4 mr-4 xs:mr-4  xs:h-2/3"`}
     >
       <div className="neoShadow h-full p-6">
         <div className="block">
-          <div className="font-bold font-mada text-lg w-full leading-5 xs:text-sm text-green-700">
+          <div className="font-bold font-mada text-lg w-full leading-5 xs:text-sm text-green-700 text-left">
             {title}
           </div>
-          <p className="font-mada block h-3/4 text-xs w-5/6 mt-1 lg:text-xs overflow-ellipsis overflow-hidden whitespace-no-wrap">
+          <p className="font-mada block h-3/4 text-xs w-5/6 mt-1 lg:text-xs overflow-ellipsis overflow-hidden whitespace-no-wrap text-left">
             {description}
           </p>
         </div>
@@ -48,10 +48,10 @@ export const MeditationTile: React.FunctionComponent<IMeditationTile> = (
             </svg>
             <div className="leading-3">{Math.round(duration / 60)} mins</div>
             <div className="block ">
-              <div className="font-bold ml-2 text-green-700 xs:text-xs">
+              <div className="font-bold ml-2 text-green-700 xs:text-xs text-left">
                 Type:
               </div>
-              <div className="font-mada ml-1 font-semibold xs:text-xs">
+              <div className="font-mada ml-1 font-semibold xs:text-xs text-right">
                 {type === Type.single ? "single" : "course"}
               </div>
             </div>
