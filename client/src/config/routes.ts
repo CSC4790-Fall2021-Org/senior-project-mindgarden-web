@@ -5,6 +5,7 @@ import LoginPage from "../pages/Auth/Login";
 import ForgotPasswordPage from "../pages/Auth/Forgot";
 import { ProfilePage } from "../pages/Profile/ProfilePage";
 import { StorePage } from "../pages/StorePage";
+import { PlayPage } from "../pages/Play/PlayPage";
 
 const routes: IRoute[] = [
   {
@@ -46,6 +47,13 @@ const routes: IRoute[] = [
     path: "/store",
     exact: true,
     component: StorePage,
+    name: "Store Page",
+    protected: true,
+  },
+  {
+    path: "/play",
+    exact: true,
+    component: PlayPage,
     name: "Store Page",
     protected: true,
   },

@@ -5,8 +5,11 @@ import { motion } from "framer-motion";
 import { FirebaseContext } from "../contexts/FirebaseContext";
 import { MeditationTile } from "../components/shared/MeditationTile";
 import { Category, Meditation, meditations, Type } from "../Models/Meditation";
+import { useHistory } from "react-router-dom";
 
 const HomePage = () => {
+  const history = useHistory();
+
   const [isChecked, setIsChecked] = useState(false);
   const [category, setCategory] = useState("home");
   const { user, fetchAllData } = useContext(FirebaseContext);
@@ -89,7 +92,12 @@ const HomePage = () => {
                   Categories
                 </label>
                 <motion.button
-                  onClick={() => console.log("bing")}
+                  onClick={() =>
+                    history.push({
+                      pathname: "play",
+                      state: { title: "bing", meditation: meditations[0] },
+                    })
+                  }
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.9 }}
                 >
