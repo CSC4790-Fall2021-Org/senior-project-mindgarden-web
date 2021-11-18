@@ -3,12 +3,16 @@
 *:after {
   box-sizing: border-box;
 }
+
 .neoShadow {
   box-shadow: 12px 12px 18px 0 rgba(0, 0, 0, 0.15), -12px -12px 18px 0 #f5f5f5;
   width: 100%;
   overflow: hidden;
   display: flex;
   border-radius: 14px;
+}
+.nmShadow {
+  box-shadow: 12px 12px 18px 0 rgba(0, 0, 0, 0.15), -12px -12px 18px 0 #f5f5f5;
 }
 
 .g-sign-in-button {

@@ -28,5 +28,6 @@ module.exports = {
   variants: {
     extend: {},
   },
+  plugins: [require("tailwindcss-neumorphism")],
   plugins: [require("daisyui")],
 };
