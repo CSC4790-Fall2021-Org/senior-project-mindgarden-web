@@ -9,7 +9,6 @@ import { useHistory } from "react-router-dom";
 
 const HomePage = () => {
   const history = useHistory();
-
   const [isChecked, setIsChecked] = useState(false);
   const [category, setCategory] = useState("home");
   const { user, fetchAllData } = useContext(FirebaseContext);
