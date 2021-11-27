@@ -11,7 +11,6 @@ export interface IPlay {
 
 export const PlayPage = (props: History) => {
   const [audio, setAudio] = useState(new Audio());
-
   const [data, setData] = useState<IPlay>();
   const [isPlaying, setIsPlaying] = useState<Boolean>(false);
   const [trackProgress, setTrackProgress] = useState<number>(0);
@@ -22,7 +21,6 @@ export const PlayPage = (props: History) => {
   useEffect(() => {
     let data: IPlay = location.state as IPlay;
     setData(data);
-    console.log("bing");
     document.addEventListener("keypress", handleSpaceBar, false);
     setAudio(
       new Audio(
@@ -32,8 +30,13 @@ export const PlayPage = (props: History) => {
   }, [location]);
 
   useEffect(() => {
-    console.log("dpr");
-    audio.addEventListener("ended", () => setIsPlaying(false));
+    audio.addEventListener("ended", () => {
+      history.push({
+        pathname: "finished",
+        state: { title: data?.title, meditation: data?.meditation },
+      });
+      setIsPlaying(false);
+    });
 
     return () => {
       audio.removeEventListener("ended", () => setIsPlaying(false));
