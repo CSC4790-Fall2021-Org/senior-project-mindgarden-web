@@ -57,9 +57,10 @@ const HomePage = () => {
                     Featured
                   </div>
                   <div className="font-mada lg:text-sm text-xs">
-                    loorem ipsum loorem ipsum loorem ipsum loorem ipsumloorem
-                    ipsum loorem ipsum loorem ipsum loorem ipsum loorem ipsum
-                    loorem ipsum loorem ipsum
+                    An unguided meditation accompanied by a selection of
+                    background noises that can be turned on or off. You can also
+                    choose to have a bell ring every 1,2,5,10,15,20,30 minutes
+                    to keep you focused.
                   </div>
                 </div>
                 <div className="font-mada font-semibold text-lg flex items-center">

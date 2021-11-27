@@ -6,6 +6,7 @@ import ForgotPasswordPage from "../pages/Auth/Forgot";
 import { ProfilePage } from "../pages/Profile/ProfilePage";
 import { StorePage } from "../pages/StorePage";
 import { PlayPage } from "../pages/Play/PlayPage";
+import { FinishedPage } from "../pages/FinishedPage";
 
 const routes: IRoute[] = [
   {
@@ -55,6 +56,13 @@ const routes: IRoute[] = [
     exact: true,
     component: PlayPage,
     name: "Store Page",
+    protected: true,
+  },
+  {
+    path: "/finished",
+    exact: true,
+    component: FinishedPage,
+    name: "Finished Page",
     protected: true,
   },
 ];

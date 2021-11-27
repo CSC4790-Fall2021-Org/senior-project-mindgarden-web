@@ -10,11 +10,7 @@ export interface IPlay {
 }
 
 export const PlayPage = (props: History) => {
-  const [audio] = useState(
-    new Audio(
-      "https://mcdn.podbean.com/mf/web/2aysdh/358_Experience_Confidence_VOCALS64r7q.mp3"
-    )
-  );
+  const [audio, setAudio] = useState(new Audio());
 
   const [data, setData] = useState<IPlay>();
   const [isPlaying, setIsPlaying] = useState<Boolean>(false);
@@ -28,10 +24,24 @@ export const PlayPage = (props: History) => {
     setData(data);
     console.log("bing");
     document.addEventListener("keypress", handleSpaceBar, false);
+    setAudio(
+      new Audio(
+        "https://mcdn.podbean.com/mf/web/2aysdh/358_Experience_Confidence_VOCALS64r7q.mp3"
+      )
+    );
   }, [location]);
 
   useEffect(() => {
-    console.log("ourealgoat", isPlaying);
+    console.log("dpr");
+    audio.addEventListener("ended", () => setIsPlaying(false));
+
+    return () => {
+      audio.removeEventListener("ended", () => setIsPlaying(false));
+    };
+  }, [audio]);
+
+  useEffect(() => {
+    console.log("ourealgoat", isPlaying, audio.duration, trackProgress);
     if (isPlaying) {
       audio.play();
       startTimer();
@@ -42,13 +52,6 @@ export const PlayPage = (props: History) => {
       audio.pause();
     }
   }, [isPlaying]);
-
-  useEffect(() => {
-    audio.addEventListener("ended", () => setIsPlaying(false));
-    return () => {
-      audio.removeEventListener("ended", () => setIsPlaying(false));
-    };
-  }, []);
 
   const startTimer = () => {
     // Clear any timers already running
