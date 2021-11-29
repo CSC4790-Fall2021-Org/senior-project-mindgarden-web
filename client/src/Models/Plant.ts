@@ -21,7 +21,7 @@ export let plants: Array<PlantType> = [
     packetImage: "/images/Daisy/daisyPacket.svg",
     one: "/images/Daisy/daisy1.svg",
     two: "/images/Daisy/daisy2.svg",
-    coverImage: "/images/Daisy/daisy3.pdf",
+    coverImage: "/images/Daisy/daisy3.svg",
     head: "/images/Daisy/daisyHead.svg",
     badge: "/images/Daisy/daisyBade.svg",
   },

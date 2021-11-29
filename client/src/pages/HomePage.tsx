@@ -18,6 +18,7 @@ const HomePage = () => {
 
   useEffect(() => {
     fetchAllData();
+    console.log(user);
     const meds = meditations.slice(3, 7);
     setRecentMeds(meds);
     const favMeds = meditations.slice(6, 12);
@@ -133,6 +134,7 @@ const HomePage = () => {
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.9 }}
                     className={`${"w-full md:w-full xs:w-full"}  " h-full mr-4 xs:mr-4 justify-start"`}
+                    key={med.id}
                   >
                     <MeditationTile med={med} isGrid={false} />
                   </motion.button>
@@ -148,6 +150,7 @@ const HomePage = () => {
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.9 }}
                     className={`${"w-full h-full"}  " h-4/5 mt-4 mr-4 xs:mr-4  xs:h-2/3"`}
+                    key={med.id}
                   >
                     <MeditationTile med={med} isGrid={true} />
                   </motion.button>
@@ -172,6 +175,7 @@ const HomePage = () => {
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.9 }}
                   className={`${"w-full h-full"}  " h-4/5 mt-4 mr-4 xs:mr-4  xs:h-2/3"`}
+                  key={med.id}
                 >
                   <MeditationTile med={med} isGrid={true} />
                 </motion.button>
