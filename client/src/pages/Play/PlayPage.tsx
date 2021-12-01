@@ -17,6 +17,7 @@ export const PlayPage = (props: History) => {
   const [isPlaying, setIsPlaying] = useState<Boolean>(false);
   const [trackProgress, setTrackProgress] = useState<number>(0);
   const [plantImage, setPlantImage] = useState<string>("/images/seed.svg");
+  const [scale, setScale] = useState<number>(1);
   const history = useHistory();
   const location = useLocation();
   const intervalRef = useRef<null | ReturnType<typeof setTimeout>>(null);
@@ -30,7 +31,6 @@ export const PlayPage = (props: History) => {
     )[0];
     setPlant(selectedPlant);
 
-    console.log(plant);
     let data: IPlay = location.state as IPlay;
     setData(data);
     document.addEventListener("keypress", handleSpaceBar, false);
@@ -56,7 +56,6 @@ export const PlayPage = (props: History) => {
   }, [audio]);
 
   useEffect(() => {
-    console.log("ourealgoat", isPlaying, audio.duration, trackProgress);
     if (isPlaying) {
       audio.play();
       startTimer();
@@ -67,16 +66,31 @@ export const PlayPage = (props: History) => {
       audio.pause();
     }
   }, [isPlaying]);
-
+  const replaceImage = () => {
+    if (audio.currentTime > audio.duration * 0.75) {
+      setPlantImage(plant.coverImage);
+      setScale(5);
+    } else if (audio.currentTime > audio.duration * 0.5) {
+      setPlantImage(plant.two);
+      setScale(4);
+    } else if (audio.currentTime > audio.duration * 0.25) {
+      setPlantImage(plant.one);
+      setScale(2);
+    } else {
+      setPlantImage("/images/seed.svg");
+      setScale(1);
+    }
+  };
   const startTimer = () => {
     // Clear any timers already running
+
     if (intervalRef.current && intervalRef) {
       clearInterval(intervalRef.current);
     }
     intervalRef.current = setInterval(() => {
       if (audio.ended) {
       } else {
-        console.log("tick", audio.currentTime);
+        replaceImage();
         setTrackProgress(audio.currentTime);
       }
     }, 1000);
@@ -92,6 +106,7 @@ export const PlayPage = (props: History) => {
   const onScrubEnd = () => {
     // If not already playing, start
     if (!isPlaying) {
+      replaceImage();
       setIsPlaying(true);
     }
     setTrackProgress(audio.currentTime);
@@ -109,7 +124,6 @@ export const PlayPage = (props: History) => {
     event.stopPropagation();
 
     if (event.key === " ") {
-      console.log("dafuq", isPlaying);
       if (isPlaying) {
         setIsPlaying(false);
       } else {
@@ -160,15 +174,15 @@ export const PlayPage = (props: History) => {
           />
         </svg>
       </div>
-      <motion.img
-        animate={{ scale: 1.2 }}
-        transition={{ ease: "easeOut", duration: 1 }}
-        src={`/images/seed.svg`}
-        alt={plant.title}
-        className={`flex  ${
-          plantImage === "/images/seed.svg" ? "w-12" : " w-1/6"
-        } justify-center h-1/4`}
-      />
+      <div className="h-64 flex justify-center items-center">
+        <motion.img
+          animate={{ scale: scale }}
+          transition={{ ease: "easeOut", duration: 1 }}
+          src={plantImage}
+          alt={plant.title}
+          className={`flex w-12 h-12`}
+        />
+      </div>
       <div className="flex flex-col justify-center items-center w-full">
         <input
           type="range"
@@ -188,6 +202,7 @@ export const PlayPage = (props: History) => {
             onClick={() => {
               audio.currentTime = audio.currentTime - 15;
               setTrackProgress(audio.currentTime);
+              replaceImage();
             }}
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.9 }}
@@ -235,6 +250,7 @@ export const PlayPage = (props: History) => {
             onClick={() => {
               audio.currentTime = audio.currentTime + 15;
               setTrackProgress(audio.currentTime);
+              replaceImage();
             }}
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.9 }}
